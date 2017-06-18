@@ -32,7 +32,6 @@ import com.google.android.gms.fitness.FitnessStatusCodes;
 import com.google.android.gms.fitness.data.DataType;
 import com.movecoachtest.stepcount.R;
 import com.movecoachtest.stepcount.alarmreciever.AlarmReceiver;
-
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import static com.movecoachtest.stepcount.config.config.NOTIFY_STEP_COUNT;
@@ -176,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
     public void cancel() {
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         manager.cancel(pendingIntent);
-        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();
     }
 
     public void readStepInBackground() {
