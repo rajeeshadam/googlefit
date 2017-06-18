@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
         //calendar.setTimeInMillis(System.currentTimeMillis());
         mStartBhour=calendar.get(Calendar.HOUR_OF_DAY);
         mStartBminute=calendar.get(Calendar.MINUTE);
-        Log.i(TAG, "hhhh"+mStartBhour);
-        Toast.makeText(getApplicationContext(), "uuu"+mStartBhour , Toast.LENGTH_SHORT).show();
 
         myFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -151,19 +149,15 @@ public class MainActivity extends AppCompatActivity {
                 new IntentFilter(NOTIFY_STEP_COUNT);
         LocalBroadcastManager.getInstance(this).registerReceiver(mLocalReceiver,
                 customFilter);
-        cancel();
         readStepInForeground();
     }
 
+
     @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(this, "OnPause", Toast.LENGTH_SHORT).show();
-        cancel();
+    protected void onStop() {
+        super.onStop();
         readStepInBackground();
-
     }
-
 
     @Override
     protected void onDestroy() {
@@ -172,11 +166,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readStepInForeground() {
+        cancel();
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         int interval = 1000*60*5;
           /* Repeating on every 5 minutes  interval */
         manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
-      //  Toast.makeText(this, "Alarm Set", Toast.LENGTH_SHORT).show();
     }
 
     public void cancel() {
@@ -186,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readStepInBackground() {
+        cancel();
         AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         int interval = 1000*60*60;
         int hour = 0;
@@ -199,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             hour=mcurrentHour;
         }
-        Toast.makeText(getApplicationContext(), mcurrentHour+"uuu"+mStartBhour+"zzz"+mStartBminute+"ddd"+mcurrentMinute+"ss" +hour, Toast.LENGTH_SHORT).show();
-        calendar.setTimeInMillis(System.currentTimeMillis());
+       calendar.setTimeInMillis(System.currentTimeMillis());
 
         calendar.set(Calendar.HOUR_OF_DAY, hour);
         calendar.set(Calendar.MINUTE, mStartBminute);

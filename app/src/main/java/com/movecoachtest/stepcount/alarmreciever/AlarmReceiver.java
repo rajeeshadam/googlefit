@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
 import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.data.DataType;
@@ -28,7 +27,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         // For our recurring task, we'll just display a message
         mContext=context;
         Log.i("StepCounter", "alarm running");
-        Toast.makeText(mContext, "I'm running", Toast.LENGTH_LONG).show();
+       // Toast.makeText(mContext, "I'm running", Toast.LENGTH_LONG).show();
         readData();
     }
 
